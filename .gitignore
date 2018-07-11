@@ -1,0 +1,10 @@
+/venv
+/__pycache__
+
+*.swp
+*.log
+client_secret.json
+credentials.json
+email_creds.py
+quickstart.py
+
