@@ -14,15 +14,6 @@ from selenium.webdriver.common.keys import Keys
 import smtplib
 import email_creds
 
-sched = BlockingScheduler()
-
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=23)
-def scheduled_job():
-    print('This job is run every day at 12')
-    loc = get_future_events()
-    data = get_pollen_data(loc)
-    send_email(data, loc)
-# sched.start()
 
 
 # Setup the Calendar API
@@ -101,3 +92,20 @@ def send_email(warn_info, locZip):
     server.sendmail(userName, sendName, msg)
     server.quit()
 
+def test_start():
+    loc = get_future_events()
+    data = get_pollen_data(loc)
+    send_email(data, loc)
+
+sched = BlockingScheduler()
+
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=23)
+def scheduled_job():
+    print('This job is run every day at 12')
+    loc = get_future_events()
+    data = get_pollen_data(loc)
+    send_email(data, loc)
+
+
+# sched.start()
+test_start()
